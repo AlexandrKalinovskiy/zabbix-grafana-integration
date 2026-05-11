@@ -1,0 +1,1608 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_ZABBIX",
+      "label": "Zabbix",
+      "type": "datasource",
+      "pluginId": "alexanderzobnin-zabbix-datasource",
+      "pluginName": "Zabbix"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "10.0.0"
+    },
+    {
+      "type": "datasource",
+      "id": "alexanderzobnin-zabbix-datasource",
+      "name": "Zabbix",
+      "version": "6.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    }
+  ],
+  "title": "Network Switch \u2014 core-edge-nexus-k1-sw1",
+  "uid": "network-switch-overview",
+  "description": "CPU utilization and transceiver temperatures for network switches via Zabbix",
+  "tags": [
+    "zabbix",
+    "network",
+    "switch",
+    "temperature"
+  ],
+  "schemaVersion": 38,
+  "version": 1,
+  "refresh": "30s",
+  "timezone": "Europe/Warsaw",
+  "time": {
+    "from": "now-3h",
+    "to": "now"
+  },
+  "graphTooltip": 1,
+  "editable": true,
+  "templating": {
+    "list": [
+      {
+        "name": "DS_ZABBIX",
+        "type": "datasource",
+        "label": "Zabbix",
+        "query": "alexanderzobnin-zabbix-datasource",
+        "refresh": 1,
+        "hide": 0,
+        "current": {}
+      }
+    ]
+  },
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0,211,255,1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "panels": [
+    {
+      "type": "row",
+      "id": 100,
+      "title": "\ud83d\udcca Overview",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "type": "stat",
+      "id": 1,
+      "title": "CPU Utilization",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 1
+      },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 50
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "core-edge-nexus-k1-sw1"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/CPU utilization/"
+          },
+          "resultFormat": "time_series",
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          },
+          "mode": 0,
+          "functions": [],
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "0",
+          "schema": 12,
+          "tags": {
+            "filter": ""
+          },
+          "table": {
+            "skipEmptyValues": false
+          },
+          "countTriggers": true,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 3
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "id": 2,
+      "title": "Monitorowane interfejsy",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 1
+      },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "textMode": "value_and_name"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "core-edge-nexus-k1-sw1"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/Transceiver Temperature Sensor: Temperature$/"
+          },
+          "resultFormat": "time_series",
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          },
+          "mode": 0,
+          "functions": [],
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "0",
+          "schema": 12,
+          "tags": {
+            "filter": ""
+          },
+          "table": {
+            "skipEmptyValues": false
+          },
+          "countTriggers": true,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 3
+        }
+      ]
+    },
+    {
+      "type": "row",
+      "id": 101,
+      "title": "\ud83d\udda5\ufe0f CPU",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      }
+    },
+    {
+      "type": "timeseries",
+      "id": 3,
+      "title": "CPU Utilization \u2014 historia",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "options": {
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        },
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 15,
+            "showPoints": "never",
+            "spanNulls": false,
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 50
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "core-edge-nexus-k1-sw1"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/CPU utilization/"
+          },
+          "resultFormat": "time_series",
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          },
+          "mode": 0,
+          "functions": [],
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "0",
+          "schema": 12,
+          "tags": {
+            "filter": ""
+          },
+          "table": {
+            "skipEmptyValues": false
+          },
+          "countTriggers": true,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 3
+        }
+      ]
+    },
+    {
+      "type": "row",
+      "id": 102,
+      "title": "\ud83c\udf21\ufe0f Temperatury transceiver\u00f3w",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      }
+    },
+    {
+      "type": "timeseries",
+      "id": 4,
+      "title": "Temperatury transceiver\u00f3w \u2014 historia",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 15
+      },
+      "options": {
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        },
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "celsius",
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "showPoints": "never",
+            "spanNulls": false,
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 60
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "core-edge-nexus-k1-sw1"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/Transceiver Temperature Sensor: Temperature$/"
+          },
+          "resultFormat": "time_series",
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          },
+          "mode": 0,
+          "functions": [],
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "0",
+          "schema": 12,
+          "tags": {
+            "filter": ""
+          },
+          "table": {
+            "skipEmptyValues": false
+          },
+          "countTriggers": true,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 3
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "id": 5,
+      "title": "Aktualne temperatury \u2014 przegl\u0105d",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 25
+      },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "celsius",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 60
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "core-edge-nexus-k1-sw1"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/Transceiver Temperature Sensor: Temperature$/"
+          },
+          "resultFormat": "time_series",
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          },
+          "mode": 0,
+          "functions": [],
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "0",
+          "schema": 12,
+          "tags": {
+            "filter": ""
+          },
+          "table": {
+            "skipEmptyValues": false
+          },
+          "countTriggers": true,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 3
+        }
+      ]
+    },
+    {
+      "type": "row",
+      "id": 103,
+      "title": "\u2705 Status sensor\u00f3w",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 33
+      }
+    },
+    {
+      "type": "table",
+      "id": 6,
+      "title": "Status sensor\u00f3w temperatury",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 34
+      },
+      "options": {
+        "footer": {
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "displayName": "Name",
+            "desc": false
+          }
+        ]
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "\u274c Critical",
+                  "color": "red"
+                }
+              }
+            },
+            {
+              "type": "value",
+              "options": {
+                "1": {
+                  "text": "\u2705 OK",
+                  "color": "green"
+                }
+              }
+            }
+          ],
+          "custom": {
+            "align": "left",
+            "displayMode": "color-background"
+          }
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "core-edge-nexus-k1-sw1"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/Temperature sensor status/"
+          },
+          "resultFormat": "table",
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          },
+          "mode": 0,
+          "functions": [],
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "0",
+          "schema": 12,
+          "tags": {
+            "filter": ""
+          },
+          "table": {
+            "skipEmptyValues": false
+          },
+          "countTriggers": true,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 3
+        }
+      ],
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "lastNotNull"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "row",
+      "id": 200,
+      "title": "\ud83d\udce1 Ruch na interfejsach",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 42
+      }
+    },
+    {
+      "type": "timeseries",
+      "id": 20,
+      "title": "Ruch przychodz\u0105cy (Bits received)",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 0,
+        "y": 43
+      },
+      "options": {
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        },
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps",
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "showPoints": "never",
+            "spanNulls": false
+          }
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "core-edge-nexus-k1-sw1"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/Interface.*: Bits received/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": true,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 3,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "id": 21,
+      "title": "Ruch wychodz\u0105cy (Bits sent)",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 43
+      },
+      "options": {
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        },
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps",
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "showPoints": "never",
+            "spanNulls": false
+          }
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "core-edge-nexus-k1-sw1"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/Interface.*: Bits sent/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": true,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 3,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "id": 22,
+      "title": "Status interfejs\u00f3w (Operational status)",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 53
+      },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "1": {
+                  "text": "\ud83d\udfe2 UP",
+                  "color": "green"
+                },
+                "2": {
+                  "text": "\ud83d\udd34 DOWN",
+                  "color": "red"
+                },
+                "3": {
+                  "text": "\ud83d\udd35 Testing",
+                  "color": "blue"
+                },
+                "4": {
+                  "text": "\u26a0\ufe0f Unknown",
+                  "color": "yellow"
+                },
+                "5": {
+                  "text": "\u2b07\ufe0f Dormant",
+                  "color": "orange"
+                },
+                "7": {
+                  "text": "\u26d4 Lower Down",
+                  "color": "red"
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "core-edge-nexus-k1-sw1"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/Interface.*: Operational status/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": true,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 3,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        }
+      ]
+    },
+    {
+      "type": "row",
+      "id": 201,
+      "title": "\u274c B\u0142\u0119dy na interfejsach",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 59
+      }
+    },
+    {
+      "type": "timeseries",
+      "id": 30,
+      "title": "B\u0142\u0119dy przychodz\u0105ce (Inbound packets with errors)",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 60
+      },
+      "options": {
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        },
+        "legend": {
+          "calcs": [
+            "max",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "pps",
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "bars",
+            "lineWidth": 1,
+            "fillOpacity": 60,
+            "showPoints": "never",
+            "spanNulls": false
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "core-edge-nexus-k1-sw1"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/Interface.*: Inbound packets with errors/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": true,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 3,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "id": 31,
+      "title": "B\u0142\u0119dy wychodz\u0105ce (Outbound packets with errors)",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 60
+      },
+      "options": {
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        },
+        "legend": {
+          "calcs": [
+            "max",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "pps",
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "bars",
+            "lineWidth": 1,
+            "fillOpacity": 60,
+            "showPoints": "never",
+            "spanNulls": false
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "core-edge-nexus-k1-sw1"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/Interface.*: Outbound packets with errors/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": true,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 3,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "id": 32,
+      "title": "Odrzucone pakiety przychodz\u0105ce (Inbound discarded)",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 68
+      },
+      "options": {
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        },
+        "legend": {
+          "calcs": [
+            "max",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "pps",
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "bars",
+            "lineWidth": 1,
+            "fillOpacity": 60,
+            "showPoints": "never",
+            "spanNulls": false
+          }
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "core-edge-nexus-k1-sw1"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/Interface.*: Inbound packets discarded/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": true,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 3,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "id": 33,
+      "title": "Odrzucone pakiety wychodz\u0105ce (Outbound discarded)",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 68
+      },
+      "options": {
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        },
+        "legend": {
+          "calcs": [
+            "max",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "pps",
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "bars",
+            "lineWidth": 1,
+            "fillOpacity": 60,
+            "showPoints": "never",
+            "spanNulls": false
+          }
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "core-edge-nexus-k1-sw1"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/Interface.*: Outbound packets discarded/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": true,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 3,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        }
+      ]
+    }
+  ]
+}

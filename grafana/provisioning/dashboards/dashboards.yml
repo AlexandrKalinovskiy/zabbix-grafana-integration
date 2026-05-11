@@ -1,0 +1,13 @@
+apiVersion: 1
+
+providers:
+  - name: default
+    orgId: 1
+    folder: "Zabbix"
+    folderUid: "zabbix"
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 30
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards

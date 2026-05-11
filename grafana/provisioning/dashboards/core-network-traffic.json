@@ -1,0 +1,2033 @@
+{
+  "uid": "core-network-traffic",
+  "title": "\ud83c\udf10 Core Network \u2014 Interface Overview",
+  "tags": [
+    "network",
+    "traffic",
+    "core"
+  ],
+  "schemaVersion": 38,
+  "version": 25,
+  "refresh": "1m",
+  "time": {
+    "from": "now-3h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "30s",
+      "1m",
+      "2m",
+      "5m",
+      "15m",
+      "30m"
+    ],
+    "time_options": [
+      "1h",
+      "2h",
+      "3h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "14d",
+      "30d"
+    ]
+  },
+  "timezone": "browser",
+  "panels": [
+    {
+      "type": "text",
+      "id": 100,
+      "title": "",
+      "transparent": true,
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 12,
+        "h": 4
+      },
+      "options": {
+        "mode": "html",
+        "content": "<img src=\"http://192.168.40.60:8090/asr.svg\" width=\"100%\" height=\"auto\" style=\"display:block;max-width:100%;\" onerror=\"this.style.outline='1px solid #f85149'\" alt=\"Port Monitor\">"
+      }
+    },
+    {
+      "type": "text",
+      "id": 101,
+      "title": "",
+      "transparent": true,
+      "gridPos": {
+        "x": 12,
+        "y": 0,
+        "w": 12,
+        "h": 4
+      },
+      "options": {
+        "mode": "html",
+        "content": "<img src=\"http://192.168.40.60:8090/juniper.svg\" width=\"100%\" height=\"auto\" style=\"display:block;max-width:100%;\" onerror=\"this.style.outline='1px solid #f85149'\" alt=\"Port Monitor\">"
+      }
+    },
+    {
+      "type": "stat",
+      "id": 102,
+      "title": "\u25bc RX",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 6,
+        "w": 2,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "CISCO ASR"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/EPIX-WAW-TRUNK.*Bits received/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": false,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 4,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        }
+      ],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-blue",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1000000.0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "type": "stat",
+      "id": 103,
+      "title": "\u25b2 TX",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 10,
+        "w": 2,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "CISCO ASR"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/EPIX-WAW-TRUNK.*Bits sent/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": false,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 4,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        }
+      ],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-purple",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1000000.0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "type": "timeseries",
+      "id": 104,
+      "title": "\ud83d\udcca Te0/0/0 \u2014 EPIX-WAW Trunk \u00b7 POL.Mix \u00b7 Global.Mix",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "x": 2,
+        "y": 6,
+        "w": 10,
+        "h": 8
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "CISCO ASR"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/EPIX-WAW-TRUNK.*Bits/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": false,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 4,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        },
+        {
+          "refId": "B",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "CISCO ASR"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/WAW-POL\\.Mix.*Bits/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": false,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 4,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        },
+        {
+          "refId": "C",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "CISCO ASR"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/WAW-Global\\.Mix.*Bits/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": false,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 4,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        },
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps",
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "showPoints": "never",
+            "gradientMode": "opacity",
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "type": "stat",
+      "id": 106,
+      "title": "\u25bc RX",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 14,
+        "w": 2,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "CISCO ASR"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/ZdalnyAdmin_BGP_R2.*Bits received/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": false,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 4,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        }
+      ],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-blue",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1000000.0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "type": "stat",
+      "id": 107,
+      "title": "\u25b2 TX",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 18,
+        "w": 2,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "CISCO ASR"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/ZdalnyAdmin_BGP_R2.*Bits sent/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": false,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 4,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        }
+      ],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-purple",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1000000.0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "type": "timeseries",
+      "id": 108,
+      "title": "\ud83d\udcca Gi0/0/4 \u2014 ZdalnyAdmin BGP R2",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "x": 2,
+        "y": 14,
+        "w": 10,
+        "h": 8
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "CISCO ASR"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/ZdalnyAdmin_BGP_R2.*Bits/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": false,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 4,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        },
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps",
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "showPoints": "never",
+            "gradientMode": "opacity",
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "type": "stat",
+      "id": 110,
+      "title": "\u25bc RX",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 22,
+        "w": 2,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "CISCO ASR"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/Te0\\/0\\/1\\(.*Bits received/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": false,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 4,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        }
+      ],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-blue",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1000000.0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "type": "stat",
+      "id": 111,
+      "title": "\u25b2 TX",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 26,
+        "w": 2,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "CISCO ASR"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/Te0\\/0\\/1\\(.*Bits sent/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": false,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 4,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        }
+      ],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-purple",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1000000.0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "type": "timeseries",
+      "id": 112,
+      "title": "\ud83d\udcca Te0/0/1 \u2014 E-Systemy \u00b7 DC WAN",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "x": 2,
+        "y": 22,
+        "w": 10,
+        "h": 8
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "CISCO ASR"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/Te0\\/0\\/1\\(.*Bits/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": false,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 4,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        },
+        {
+          "refId": "B",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "CISCO ASR"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/E-Systemy_K2_R1.*Bits/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": false,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 4,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        },
+        {
+          "refId": "C",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "CISCO ASR"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/Te0\\/0\\/1\\.451.*Bits/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": false,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 4,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        },
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps",
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "showPoints": "never",
+            "gradientMode": "opacity",
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "type": "stat",
+      "id": 114,
+      "title": "\u25bc RX",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 6,
+        "w": 2,
+        "h": 6
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "JUNIPER"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/et-0\\/0\\/0\\]\\[.*Bits received/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": false,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 4,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        }
+      ],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-blue",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1000000.0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "type": "stat",
+      "id": 115,
+      "title": "\u25b2 TX",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 12,
+        "w": 2,
+        "h": 6
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "JUNIPER"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/et-0\\/0\\/0\\]\\[.*Bits sent/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": false,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 4,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        }
+      ],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-purple",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1000000.0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "type": "timeseries",
+      "id": 116,
+      "title": "\ud83d\udcca et-0/0/0 \u2014 EPIX-KAT Trunk \u00b7 POL.Mix \u00b7 Global.Mix",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "x": 14,
+        "y": 6,
+        "w": 10,
+        "h": 12
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "JUNIPER"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/et-0\\/0\\/0\\]\\[.*Bits/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": false,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 4,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        },
+        {
+          "refId": "B",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "JUNIPER"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/KAT-POL\\.Mix.*Bits/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": false,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 4,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        },
+        {
+          "refId": "C",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "JUNIPER"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/KAT-Global\\.Mix.*Bits/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": false,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 4,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        },
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps",
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "showPoints": "never",
+            "gradientMode": "opacity",
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "type": "stat",
+      "id": 118,
+      "title": "\u25bc RX",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 18,
+        "w": 2,
+        "h": 6
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "JUNIPER"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/et-0\\/0\\/1\\]\\[\\].*Bits received/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": false,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 4,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        }
+      ],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-blue",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1000000.0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "type": "stat",
+      "id": 119,
+      "title": "\u25b2 TX",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 24,
+        "w": 2,
+        "h": 6
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "JUNIPER"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/et-0\\/0\\/1\\]\\[\\].*Bits sent/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": false,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 4,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        }
+      ],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-purple",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1000000.0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "type": "timeseries",
+      "id": 120,
+      "title": "\ud83d\udcca et-0/0/1 \u2014 E-Systemy \u00b7 DC WAN",
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "PA67C5EADE9207728"
+      },
+      "gridPos": {
+        "x": 14,
+        "y": 18,
+        "w": 10,
+        "h": 12
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "JUNIPER"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/et-0\\/0\\/1\\]\\[\\].*Bits/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": false,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 4,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        },
+        {
+          "refId": "B",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "JUNIPER"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/E-Systemy_K1_R1.*Bits/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": false,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 4,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        },
+        {
+          "refId": "C",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "PA67C5EADE9207728"
+          },
+          "mode": 0,
+          "queryType": "0",
+          "schema": 12,
+          "group": {
+            "filter": "/.*/"
+          },
+          "host": {
+            "filter": "JUNIPER"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/DC_WAN_85.*Bits/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "tags": {
+            "filter": ""
+          },
+          "functions": [],
+          "resultFormat": "time_series",
+          "countTriggers": false,
+          "countTriggersBy": "",
+          "evaltype": "0",
+          "minSeverity": 4,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": true,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          }
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        },
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps",
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "showPoints": "never",
+            "gradientMode": "opacity",
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      }
+    }
+  ],
+  "templating": {
+    "list": []
+  },
+  "annotations": {
+    "list": []
+  },
+  "style": "dark"
+}
