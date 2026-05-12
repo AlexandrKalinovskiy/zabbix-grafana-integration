@@ -1,0 +1,36 @@
+gerbil:
+  start_port: 51820
+  base_endpoint: "192.168.40.60"
+
+app:
+  dashboard_url: "http://192.168.40.60"
+  log_level: "info"
+  save_logs: false
+  telemetry:
+    anonymous_usage: false
+
+domains:
+  domain1:
+    base_domain: "192.168.40.60"
+    cert_resolver: ""
+
+server:
+  # Obydwa pangolinki muszą mieć TEN SAM secret — wspólna sesja!
+  secret: "ha-test-pangolin-secret-taki-sam-na-obu-nodach"
+  cors:
+    origins:
+      - "http://192.168.40.60"
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"]
+    allowed_headers: ["X-CSRF-Token", "Content-Type"]
+    credentials: false
+
+flags:
+  require_email_verification: false
+  disable_signup_without_invite: false
+  disable_user_create_org: false
+  allow_raw_resources: true
+
+# ── Pangolin-2 → YugabyteDB NODE2 (lokalny) ──────────────────────
+# Sidecar hc-node2 monitoruje czy node2 żyje — jeśli nie, HAProxy odcina ruch
+postgres:
+  connection_string: "postgresql://yugabyte@172.20.0.11:5433/pangolin"

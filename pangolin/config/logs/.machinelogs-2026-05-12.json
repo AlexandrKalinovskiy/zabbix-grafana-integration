@@ -1,0 +1,29 @@
+{"level":"\u001b[33mwarn\u001b[39m","message":"Email SMTP configuration is missing. Emails will not be sent.","timestamp":"2026-05-12T10:19:54+00:00"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Analytics usage statistics collection is disabled. If you enable this, you can help us make Pangolin better for everyone. Learn more at: https://docs.pangolin.net/telemetry","timestamp":"2026-05-12T10:19:58+00:00"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Dashboard API server is running on http://localhost:3000","timestamp":"2026-05-12T10:19:58+00:00"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Internal API server is running on http://localhost:3001","timestamp":"2026-05-12T10:19:58+00:00"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Dashboard Web UI server is running on http://localhost:3002","timestamp":"2026-05-12T10:20:01+00:00"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Created new exit node Exit Node VtVPkySR with address 100.89.128.1/24 and port 51820","timestamp":"2026-05-12T10:20:07+00:00"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"Email SMTP configuration is missing. Emails will not be sent.","timestamp":"2026-05-12T10:31:00+00:00"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Analytics usage statistics collection is disabled. If you enable this, you can help us make Pangolin better for everyone. Learn more at: https://docs.pangolin.net/telemetry","timestamp":"2026-05-12T10:31:02+00:00"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Dashboard API server is running on http://localhost:3000","timestamp":"2026-05-12T10:31:03+00:00"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Internal API server is running on http://localhost:3001","timestamp":"2026-05-12T10:31:03+00:00"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Dashboard Web UI server is running on http://localhost:3002","timestamp":"2026-05-12T10:31:06+00:00"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"Email SMTP configuration is missing. Emails will not be sent.","timestamp":"2026-05-12T10:35:28+00:00"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Analytics usage statistics collection is disabled. If you enable this, you can help us make Pangolin better for everyone. Learn more at: https://docs.pangolin.net/telemetry","timestamp":"2026-05-12T10:35:31+00:00"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Dashboard API server is running on http://localhost:3000","timestamp":"2026-05-12T10:35:32+00:00"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Internal API server is running on http://localhost:3001","timestamp":"2026-05-12T10:35:32+00:00"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Dashboard Web UI server is running on http://localhost:3002","timestamp":"2026-05-12T10:35:34+00:00"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Updated exit node with reachableAt to http://gerbil:3004","timestamp":"2026-05-12T10:35:34+00:00"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"Failed to fetch latest Newt version from GitHub: 403 rate limit exceeded","timestamp":"2026-05-12T10:36:45+00:00"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"Failed to fetch latest Newt version from GitHub: 403 rate limit exceeded","timestamp":"2026-05-12T10:36:53+00:00"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"Failed to fetch latest Newt version from GitHub: 403 rate limit exceeded","timestamp":"2026-05-12T10:36:57+00:00"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"Failed to fetch latest Newt version from GitHub: 403 rate limit exceeded","timestamp":"2026-05-12T10:37:16+00:00"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"Failed to fetch latest Newt version from GitHub: 403 rate limit exceeded","timestamp":"2026-05-12T10:37:28+00:00"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"Failed to fetch latest Newt version from GitHub: 403 rate limit exceeded","timestamp":"2026-05-12T10:37:32+00:00"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"Email SMTP configuration is missing. Emails will not be sent.","timestamp":"2026-05-12T10:39:25+00:00"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Analytics usage statistics collection is disabled. If you enable this, you can help us make Pangolin better for everyone. Learn more at: https://docs.pangolin.net/telemetry","timestamp":"2026-05-12T10:39:27+00:00"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Dashboard API server is running on http://localhost:3000","timestamp":"2026-05-12T10:39:28+00:00"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Internal API server is running on http://localhost:3001","timestamp":"2026-05-12T10:39:28+00:00"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Dashboard Web UI server is running on http://localhost:3002","timestamp":"2026-05-12T10:39:30+00:00"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Updated exit node with reachableAt to http://gerbil:3004","timestamp":"2026-05-12T10:39:31+00:00"}

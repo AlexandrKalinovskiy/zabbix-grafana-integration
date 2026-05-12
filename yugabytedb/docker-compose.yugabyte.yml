@@ -1,0 +1,134 @@
+version: '3.8'
+
+# ═══════════════════════════════════════════════════════════════════
+#  YugabyteDB — klaster 3-node (RF=3, quorum: 2/3 nodów)
+#
+#  Architektura: yugabyted multi-node z Raft consensus.
+#  RF=3 — klaster przetrwa utratę 1 dowolnej nody (quorum = 2).
+#
+#  PORTY (node1 — zewnętrzne):
+#    5433  — YSQL (PostgreSQL-compatible SQL)
+#    9042  — YCQL (Cassandra-compatible)
+#    7000  — YB-Master UI (Web)
+#    9000  — YB-TServer UI (Web)
+#   15433  — YugabyteDB UI (główny dashboard)
+#
+#  PORTY (node2, node3 — tylko host-mapping, komunikacja wewnętrzna):
+#    5434  — YSQL node2
+#    5435  — YSQL node3
+# ═══════════════════════════════════════════════════════════════════
+
+networks:
+  yugabyte-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+
+volumes:
+  yb-node1-data:
+  yb-node2-data:
+  yb-node3-data:
+
+services:
+
+  # ─── YugabyteDB Node 1 (primary / seed node) ───────────────────
+  yb-node1:
+    image: yugabytedb/yugabyte:2025.2.2.2-b11
+    container_name: yb-node1
+    hostname: yb-node1
+    restart: unless-stopped
+    networks:
+      yugabyte-net:
+        ipv4_address: 172.20.0.10
+    ports:
+      - "5433:5433"     # YSQL — PostgreSQL-compatible
+      - "9042:9042"     # YCQL — Cassandra-compatible
+      - "7000:7000"     # YB-Master Web UI
+      - "9000:9000"     # YB-TServer Web UI
+      - "15433:15433"   # YugabyteDB UI (dashboard)
+    volumes:
+      - yb-node1-data:/home/yugabyte/var
+    command: >
+      bin/yugabyted start
+      --advertise_address=172.20.0.10
+      --base_dir=/home/yugabyte/var
+      --cloud_location=docker.local.zone1
+      --fault_tolerance=zone
+      --background=false
+    healthcheck:
+      test: ["CMD-SHELL", "bin/yugabyted status --base_dir=/home/yugabyte/var | grep Running"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 60s
+
+  # ─── YugabyteDB Node 2 (joins node1) ───────────────────────────
+  yb-node2:
+    image: yugabytedb/yugabyte:2025.2.2.2-b11
+    container_name: yb-node2
+    hostname: yb-node2
+    restart: unless-stopped
+    networks:
+      yugabyte-net:
+        ipv4_address: 172.20.0.11
+    ports:
+      - "5434:5433"     # YSQL node2 (mapowany na 5434 na hoście)
+      - "7001:7000"     # YB-Master Web UI node2
+      - "9001:9000"     # YB-TServer Web UI node2
+      - "15434:15433"   # YugabyteDB UI node2 (backup gdy node1 down)
+    volumes:
+      - yb-node2-data:/home/yugabyte/var
+    command: >
+      bin/yugabyted start
+      --advertise_address=172.20.0.11
+      --base_dir=/home/yugabyte/var
+      --cloud_location=docker.local.zone2
+      --fault_tolerance=zone
+      --join=172.20.0.10
+      --background=false
+    depends_on:
+      yb-node1:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "bin/yugabyted status --base_dir=/home/yugabyte/var | grep Running"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 60s
+
+  # ─── YugabyteDB Node 3 (joins node1, RF=3 quorum) ──────────────
+  yb-node3:
+    image: yugabytedb/yugabyte:2025.2.2.2-b11
+    container_name: yb-node3
+    hostname: yb-node3
+    restart: unless-stopped
+    networks:
+      yugabyte-net:
+        ipv4_address: 172.20.0.12
+    ports:
+      - "5435:5433"     # YSQL node3 (mapowany na 5435 na hoście)
+      - "7002:7000"     # YB-Master Web UI node3
+      - "9002:9000"     # YB-TServer Web UI node3
+      - "15435:15433"   # YugabyteDB UI node3 (backup gdy node1/node2 down)
+    volumes:
+      - yb-node3-data:/home/yugabyte/var
+    command: >
+      bin/yugabyted start
+      --advertise_address=172.20.0.12
+      --base_dir=/home/yugabyte/var
+      --cloud_location=docker.local.zone3
+      --fault_tolerance=zone
+      --join=172.20.0.10
+      --background=false
+    depends_on:
+      yb-node1:
+        condition: service_healthy
+      yb-node2:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "bin/yugabyted status --base_dir=/home/yugabyte/var | grep Running"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 60s

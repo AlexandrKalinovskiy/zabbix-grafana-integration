@@ -1,0 +1,101 @@
+name: pangolin-ha
+
+services:
+
+  # ── Pangolin-1 → YugabyteDB node1 ───────────────────────────────
+  pangolin-1:
+    image: docker.io/fosrl/pangolin:postgresql-latest
+    container_name: pangolin-1
+    restart: unless-stopped
+    volumes:
+      - ./config-node1:/app/config
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/api/v1/"]
+      interval: "10s"
+      timeout: "5s"
+      retries: 3
+      start_period: "30s"
+    networks:
+      - pangolin-ha-net
+      - yugabyte-net
+
+  # ── Pangolin-2 → YugabyteDB node2 ───────────────────────────────
+  pangolin-2:
+    image: docker.io/fosrl/pangolin:postgresql-latest
+    container_name: pangolin-2
+    restart: unless-stopped
+    volumes:
+      - ./config-node2:/app/config
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/api/v1/"]
+      interval: "10s"
+      timeout: "5s"
+      retries: 3
+      start_period: "30s"
+    networks:
+      - pangolin-ha-net
+      - yugabyte-net
+
+  # ── Sidecar: sprawdza pangolin-1 + yb-node1 ──────────────────────
+  hc-node1:
+    build:
+      context: .
+      dockerfile: Dockerfile.healthcheck
+    container_name: hc-node1
+    restart: unless-stopped
+    environment:
+      PANGOLIN_HOST: pangolin-1
+      YB_HOST: "172.20.0.10"   # yb-node1
+    networks:
+      - pangolin-ha-net
+      - yugabyte-net
+
+  # ── Sidecar: sprawdza pangolin-2 + yb-node2 ──────────────────────
+  hc-node2:
+    build:
+      context: .
+      dockerfile: Dockerfile.healthcheck
+    container_name: hc-node2
+    restart: unless-stopped
+    environment:
+      PANGOLIN_HOST: pangolin-2
+      YB_HOST: "172.20.0.11"   # yb-node2
+    networks:
+      - pangolin-ha-net
+      - yugabyte-net
+
+  # ── Sorry page — pokazywana gdy OBA pangolinki są DOWN ───────────
+  sorry-page:
+    image: nginx:alpine
+    container_name: sorry-page
+    restart: unless-stopped
+    volumes:
+      - ./maintenance.html:/usr/share/nginx/html/index.html:ro
+    networks:
+      - pangolin-ha-net
+
+  # ── HAProxy — load balancer ───────────────────────────────────────
+  haproxy:
+    image: haproxy:3.0-alpine
+    container_name: haproxy-pangolin
+    restart: unless-stopped
+    depends_on:
+      pangolin-1:
+        condition: service_healthy
+      pangolin-2:
+        condition: service_healthy
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    ports:
+      - "80:80"
+      - "8404:8404"
+    networks:
+      - pangolin-ha-net
+
+networks:
+  pangolin-ha-net:
+    driver: bridge
+    name: pangolin-ha-net
+  yugabyte-net:
+    external: true
+    name: yugabytedb_yugabyte-net

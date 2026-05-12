@@ -1,0 +1,5 @@
+FROM python:3.12-alpine
+# curl do sprawdzenia Pangolina HTTP
+RUN apk add --no-cache curl
+COPY healthcheck.py /healthcheck.py
+CMD ["python", "/healthcheck.py"]

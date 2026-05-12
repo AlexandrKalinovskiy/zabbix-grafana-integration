@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 7
+    },
+    "auditLog": "config/logs/.c9c5b7a79ef573d8fab30fca60d2e3991131cdb3-audit.json",
+    "files": [
+        {
+            "date": 1778581055281,
+            "name": "config/logs/pangolin-2026-05-12.log",
+            "hash": "36584b3e682cbef55e565776e5b79e27773205cb4dedc6d92b5f5f84f580d8b6"
+        }
+    ],
+    "hashType": "sha256"
+}
