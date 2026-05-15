@@ -7,7 +7,7 @@
     "core"
   ],
   "schemaVersion": 38,
-  "version": 26,
+  "version": 28,
   "refresh": "1m",
   "time": {
     "from": "now-3h",
@@ -1234,7 +1234,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/et-0\\/0\\/0\\]\\[.*Bits received/"
+            "filter": "/et-0\\/0\\/0\\(\\).*Bits received/"
           },
           "itemTag": {
             "filter": ""
@@ -1338,7 +1338,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/et-0\\/0\\/0\\]\\[.*Bits sent/"
+            "filter": "/et-0\\/0\\/0\\(\\).*Bits sent/"
           },
           "itemTag": {
             "filter": ""
@@ -1442,7 +1442,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/et-0\\/0\\/0\\]\\[.*Bits/"
+            "filter": "/et-0\\/0\\/0\\(\\).*Bits/"
           },
           "itemTag": {
             "filter": ""
@@ -1645,7 +1645,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/et-0\\/0\\/1\\]\\[\\].*Bits received/"
+            "filter": "/et-0\\/0\\/1\\(\\).*Bits received/"
           },
           "itemTag": {
             "filter": ""
@@ -1749,7 +1749,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/et-0\\/0\\/1\\]\\[\\].*Bits sent/"
+            "filter": "/et-0\\/0\\/1\\(\\).*Bits sent/"
           },
           "itemTag": {
             "filter": ""
@@ -1853,7 +1853,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/et-0\\/0\\/1\\]\\[\\].*Bits/"
+            "filter": "/et-0\\/0\\/1\\(\\).*Bits/"
           },
           "itemTag": {
             "filter": ""
