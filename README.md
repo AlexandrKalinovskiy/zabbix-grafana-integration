@@ -200,15 +200,16 @@ grafana:
 
 Wszystkie kontenery są w sieci `zabbix-net` (bridge). Dzięki temu:
 
-| Połączenie | Adres w sieci Docker |
+| Połączenie | Adres |
 |---|---|
-| Grafana → Zabbix API | `http://zabbix-web:8080/api_jsonrpc.php` |
+| Grafana → Zabbix API (produkcja) | `http://zabbix.dc.prod/api_jsonrpc.php` |
+| Port Monitor → Zabbix API (produkcja) | `http://zabbix.dc.prod/api_jsonrpc.php` |
 | Zabbix Server → PostgreSQL | `postgres:5432` |
 | Zabbix Web → PostgreSQL | `postgres:5432` |
 | Zabbix Web → Zabbix Server | `zabbix-server:10051` |
 | Zabbix Agent → Zabbix Server | `zabbix-server:10051` |
 
-> **Ważne:** W datasource Grafany URL wskazuje na `zabbix-web` (nazwę kontenera), a NIE na `localhost`. To kluczowe — kontenery komunikują się przez wewnętrzne DNS sieci Docker.
+> **Ważne:** Grafana i Port Monitor są podpięte pod **zewnętrzny produkcyjny serwer Zabbix** (`zabbix.dc.prod`, IP: 192.168.40.30). Lokalny kontener `zabbix-web` służy wyłącznie jako backup/test.
 
 ---
 
@@ -216,12 +217,12 @@ Wszystkie kontenery są w sieci `zabbix-net` (bridge). Dzięki temu:
 
 ### 6.1 Monitorowane urządzenia
 
-| Host | IP | Protokół | Wersja SNMP | Uwagi |
+| Host (nazwa w Zabbix) | IP | Protokół | Wersja SNMP | Uwagi |
 |---|---|---|---|---|
 | core-edge-nexus-k1-sw1 | 172.16.2.11 | SNMP | v2c | Community: `{$SNMP_COMMUNITY}` |
 | CORE-SG-K1-SW1 | 172.16.2.101 | SNMP | v2c | Community: `{$SNMP_COMMUNITY}` |
-| CISCO ASR | 172.16.2.200 | SNMP | v3 | authPriv, SHA+AES |
-| JUNIPER | 172.16.2.105 | SNMP | v3 | authPriv |
+| **CORE-SG-K2-R1** | 172.16.2.200 | SNMP | v3 | Cisco ASR — authPriv, SHA+AES |
+| **CORE-SG-K1-R1-Juniper** | 172.16.2.105 | SNMP | v3 | Juniper MX204 — authPriv |
 
 ### 6.2 Użyte szablony Zabbix
 
@@ -281,23 +282,25 @@ datasources:
   - name: Zabbix
     type: alexanderzobnin-zabbix-datasource
     access: proxy
-    url: http://zabbix-web:8080/api_jsonrpc.php
+    url: http://zabbix.dc.prod/api_jsonrpc.php   # produkcyjny Zabbix
     jsonData:
-      username: Admin
+      username: dc
       trends: true        # włącz dane trendów (zagregowane hourly)
       trendsFrom: "7d"    # dane starsze niż 7 dni ładuj z trendów
       trendsRange: "4d"   # zakres przy którym przełącz na trendy
       cacheTTL: "1h"      # czas cache wyników w pluginie
     secureJsonData:
-      password: "Op2oyxq##"
+      password: "xgGuLU94SX"
     isDefault: true
     editable: true
 ```
 
 **Kluczowe parametry:**
-- `url` — wskazuje na wewnętrzny adres Zabbix Web (`zabbix-web:8080`)
+- `url` — wskazuje na produkcyjny serwer Zabbix (`zabbix.dc.prod`, IP: 192.168.40.30)
 - `trends: true` — dla zakresów > `trendsFrom` plugin automatycznie używa danych trendów (szybciej, mniej danych)
 - `cacheTTL` — plugin cache'uje listy hostów/itemów po stronie backendu
+
+> **Uwaga dot. Zabbix 6.4+:** Plugin używa autoryzacji przez nagłówek HTTP `Authorization: Bearer <token>` zamiast przestarzałego pola `auth` w body JSON. Port Monitor ma analogiczną poprawkę w `server.py`.
 
 Po załadowaniu datasource można sprawdzić jego UID:
 ```bash
@@ -599,8 +602,10 @@ Odpowiedź:
 
 | Serwis | URL | Login | Hasło |
 |---|---|---|---|
-| Grafana | `http://192.168.40.60:3000` | `admin` | `Op2oyxq##` |
-| Zabbix | `http://192.168.40.60:8080` | `Admin` | `Op2oyxq##` |
+| **Grafana** | `http://192.168.40.60:3000` | `admin` | `Op2oyxq##` |
+| **Zabbix prod** | `http://zabbix.dc.prod` (192.168.40.30) | `dc` | `xgGuLU94SX` |
+| Zabbix lokalny | `http://192.168.40.60:8080` | `Admin` | `Op2oyxq##` |
+| **Port Monitor** | `http://192.168.40.60:8090` | — | — |
 
 ### Datasource Grafana
 
@@ -609,7 +614,15 @@ Odpowiedź:
 | Name | `Zabbix` |
 | UID | `PA67C5EADE9207728` |
 | Type | `alexanderzobnin-zabbix-datasource` |
-| URL | `http://zabbix-web:8080/api_jsonrpc.php` |
+| URL | `http://zabbix.dc.prod/api_jsonrpc.php` |
+| User | `dc` |
+
+### Hosty routerów w produkcyjnym Zabbixie
+
+| Urządzenie | Nazwa hosta w Zabbix | hostid | IP |
+|---|---|---|---|
+| Cisco ASR 1000 | `CORE-SG-K2-R1` | `10454` | 172.16.2.200 |
+| Juniper MX204 | `CORE-SG-K1-R1-Juniper` | `10643` | 172.16.2.105 |
 
 ### Linki do dashboardów (kiosk mode)
 
@@ -621,6 +634,9 @@ http://192.168.40.60:3000/d/core-network-traffic
 # Fullscreen (bez navbar)
 http://192.168.40.60:3000/d/core-network-traffic?kiosk
 http://192.168.40.60:3000/d/core-network-traffic?kiosk&refresh=1m
+
+# Port Monitor (standalone, z animacjami)
+http://192.168.40.60:8090/
 ```
 
 ---
@@ -684,12 +700,34 @@ docker compose restart grafana
 **Rozwiązanie:** Ustaw na `"/.*/"`
 
 **Przyczyna 3:** Brakujące pola `schema: 12`, `queryType: "0"`, lub `mode: 0`  
-**Rozwiązanie:** Użyj pełnego formatu targetu jak w sekcji 10.1
+**Rozwiązanie:** Użyj pełnego formatu targetu jak w sekcji 11.1
 
 ### Problem: "Non-metrics queries are not supported"
 
 **Przyczyna:** Backend Go nie widzi pola `mode` lub ma niepoprawny typ  
 **Rozwiązanie:** Ustaw `"mode": 0` (integer, nie string!)
+
+### Problem: Port Monitor pokazuje "No data" / "error"
+
+**Przyczyna 1:** Zabbix 6.4+ wymaga Bearer token w nagłówku HTTP (nie w body)  
+**Rozwiązanie:** `server.py` używa `Authorization: Bearer <token>` — sprawdź czy poprawka jest wdrożona
+
+**Przyczyna 2:** Zmiana formatu nazw itemów interfejsów Juniper między wersjami szablonów  
+- Stary format: `Interface et-0/0/0][]: Bits received`  
+- Nowy format: `Interface et-0/0/0(): Bits received`  
+**Rozwiązanie:** Zaktualizuj filtry w dashboardzie: `\]\[` → `\(\)`
+
+**Diagnostyka:**
+```bash
+# Sprawdź jakie itemy ma host w Zabbixie
+curl -s -X POST http://zabbix.dc.prod/api_jsonrpc.php \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer TOKEN" \
+  -d '{"jsonrpc":"2.0","method":"item.get","params":{"output":["name"],"hostids":["10454"],"search":{"name":"Bits"},"limit":20},"id":1}'
+
+# Sprawdź dane z Port Monitor API
+curl http://localhost:8090/api/data | python3 -m json.tool | head -50
+```
 
 ### Problem: SNMP timeout na urządzeniu
 
@@ -717,17 +755,29 @@ snmpget -v3 -l authPriv -u USER -a SHA -A AUTHPASS \
 python3 -m json.tool grafana/provisioning/dashboards/nazwa.json
 ```
 
-### Problem: Grafana nie łączy się z Zabbix (datasource health fail)
+### Problem: Grafana nie łączy się z Zabbix produkcyjnym
 
 **Sprawdzenie:**
 ```bash
-# Czy kontenery w tej samej sieci?
-docker network inspect zabbix-grafana-integration_zabbix-net
+# Test połączenia z hosta
+curl -s -X POST http://zabbix.dc.prod/api_jsonrpc.php \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"user.login","params":{"username":"dc","password":"xgGuLU94SX"},"id":1}'
+# Oczekiwana odpowiedź: {"result":"TOKEN..."}
 
-# Czy Zabbix Web odpowiada?
-docker exec grafana curl -s http://zabbix-web:8080/ping
+# Sprawdź logi Grafany
+docker compose logs --tail=50 grafana | grep -i 'zabbix\|error\|datasource'
 ```
+
+### Przepięcie na inny serwer Zabbix
+
+Zmień 3 miejsca:
+1. `grafana/provisioning/datasources/zabbix.yml` — URL, username, password
+2. `port-monitor/server.py` — `ZABBIX_URL`, `ZABBIX_USER`, `ZABBIX_PASS`, `HOSTS` (hostid)
+3. `docker-compose.yml` — env vars sekcji `port-monitor`
+
+Następnie: `docker compose build port-monitor && docker compose up -d`
 
 ---
 
-*Dokumentacja aktualna na dzień 2026-05-08. Projekt uruchomiony na serwerze 192.168.40.60.*
+*Dokumentacja aktualna na dzień 2026-05-15. Projekt uruchomiony na serwerze 192.168.40.60, podpięty pod produkcyjny Zabbix (zabbix.dc.prod).*
