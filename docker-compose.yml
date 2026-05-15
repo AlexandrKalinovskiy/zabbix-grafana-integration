@@ -121,9 +121,6 @@ services:
     ports:
       - "8090:8090"
     environment:
-      ZABBIX_URL: http://zabbix-web:8080/api_jsonrpc.php
-      ZABBIX_USER: Admin
-      ZABBIX_PASS: "Op2oyxq##"
-    depends_on:
-      zabbix-web:
-        condition: service_healthy
+      ZABBIX_URL: http://zabbix.dc.prod/api_jsonrpc.php
+      ZABBIX_USER: dc
+      ZABBIX_PASS: "xgGuLU94SX"

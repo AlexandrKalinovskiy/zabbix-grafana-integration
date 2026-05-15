@@ -4,13 +4,13 @@ import json, re, os
 import urllib.request
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
-ZABBIX_URL  = os.environ.get("ZABBIX_URL",  "http://zabbix-web:8080/api_jsonrpc.php")
-ZABBIX_USER = os.environ.get("ZABBIX_USER", "Admin")
-ZABBIX_PASS = os.environ.get("ZABBIX_PASS", "Op2oyxq##")
+ZABBIX_URL  = os.environ.get("ZABBIX_URL",  "http://zabbix.dc.prod/api_jsonrpc.php")
+ZABBIX_USER = os.environ.get("ZABBIX_USER", "dc")
+ZABBIX_PASS = os.environ.get("ZABBIX_PASS", "xgGuLU94SX")
 
 HOSTS = [
-    {"hostid": "10689", "label": "Cisco ASR 1000", "ip": "172.16.2.200", "accent": "#2196F3"},
-    {"hostid": "10686", "label": "Juniper MX204",  "ip": "172.16.2.105", "accent": "#FF9800"},
+    {"hostid": "10454", "label": "Cisco ASR 1000", "ip": "172.16.2.200", "accent": "#2196F3"},
+    {"hostid": "10643", "label": "Juniper MX204",  "ip": "172.16.2.105", "accent": "#FF9800"},
 ]
 
 # Interfaces to skip (loopback / internal / management)
@@ -20,11 +20,12 @@ SKIP_RE = re.compile(
 
 def zbx(method, params, auth=None):
     body = {"jsonrpc": "2.0", "method": method, "params": params, "id": 1}
+    headers = {"Content-Type": "application/json"}
     if auth:
-        body["auth"] = auth
+        # Zabbix 6.4+ uses Bearer token in header; older versions used body["auth"]
+        headers["Authorization"] = f"Bearer {auth}"
     req = urllib.request.Request(
-        ZABBIX_URL, json.dumps(body).encode(),
-        headers={"Content-Type": "application/json"})
+        ZABBIX_URL, json.dumps(body).encode(), headers=headers)
     with urllib.request.urlopen(req, timeout=15) as r:
         return json.load(r).get("result")
 
