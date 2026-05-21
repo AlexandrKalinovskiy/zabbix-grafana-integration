@@ -101,6 +101,20 @@ def fetch_ports():
                     if dm2:
                         ports[iface]["desc"] = dm2.group(1)
 
+            # Ensure 4 x 100G ports exist for Juniper
+            if host_def["hostid"] == "10643":
+                for target_iface in ["et-0/0/0", "et-0/0/1", "et-0/0/2", "et-0/0/3"]:
+                    if target_iface not in ports:
+                        ports[target_iface] = {
+                            "name": target_iface,
+                            "speed_bps": 100_000_000_000,
+                            "op_status": 2,
+                            "errors": 0,
+                            "desc": "Zarezerwowany 100G"
+                        }
+                    else:
+                        ports[target_iface]["speed_bps"] = 100_000_000_000
+
             def get_status(p):
                 s  = p["speed_bps"]
                 op = p["op_status"]
